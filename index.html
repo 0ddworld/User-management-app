@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/style.css" rel="stylesheet"/>
+        <title>User Management App</title>
+    </head>
+    <body ng-app="app">
+        <div ng-controller="usersController">
+            <div ng-show="loading">Chargement...</div>
+            <div ng-hide="loading">
+
+                <!--Display user-->
+                <div ng-repeat="u in users">
+                    <p>{{u.firstName}} {{u.lastName}} - <a href="#" ng-click="showEditUser(u)">Editer</a> - <a href="#" ng-click="deleteUser(u)">Supprimer</a></p>
+                </div>
+
+                <hr/>
+                <!--If user selected display edit user form-->
+                <form novalidate ng-show="user">
+                    <h3>Modifier l'utilisateur {{user.firstName}} {{user.lastName}}</h3>
+                    <label>firstName:</label><input type="text" ng-model="user.firstName"/><br/>
+                    <label>lastName:</label><input type="text" ng-model="user.lastName"/><br/>
+                    <label>email:</label><input type="email" ng-model="user.email"/><br/>
+                    <input type="submit" ng-click="editUser(user)" value="Sauvegarder"/>
+                    <button ng-click="reset()">Annuler</button>
+                </form>
+
+                <!--If no user selected display add user form-->
+                <form novalidate ng-hide="user">
+                    <h3>Ajouter un nouvel utilisateur</h3>
+                    <label>firstName:</label><input type="text" ng-model="n.firstName"/><br/>
+                    <label>lastName:</label><input type="text" ng-model="n.lastName"/><br/>
+                    <label>email:</label><input type="email" ng-model="n.email"/><br/>
+                    <input type="submit" ng-click="addUser()" value="Ajouter"/>
+                </form>
+            </div>
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.7.7/angular-resource.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
